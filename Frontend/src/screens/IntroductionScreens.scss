@@ -1,0 +1,70 @@
+@use '../styles/var.module.scss' as vars;
+
+.container {
+  position: relative;
+  min-height: 100%;
+  width: 100vw;
+  margin: 0 auto;
+  padding-bottom: 25px;
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  h1 {
+    text-align: center;
+    font-size: 40px;
+    margin: 15px 0;
+  }
+  .paragraphs {
+    text-align: justify;
+    hyphens: auto;
+    p {
+      margin: 25px 0;
+      font-size: 18px;
+    }
+  }
+  .button {
+    font-size: large;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    padding: 15px 25px;
+    color: vars.$white;
+    background-color: vars.$blue;
+    border: none;
+    border-radius: 35px;
+    margin: 15px 0;
+    opacity: 1;
+    cursor: pointer;
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+  
+  .access-buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 25px;
+    button {
+      font-size: medium;
+      font-weight: 600;
+      text-decoration: none;
+      text-align: center;
+      padding: 15px;
+      color: vars.$white;
+      background-color: vars.$green;
+      border: none;
+      border-radius: 25px;
+      opacity: 1;
+      cursor: pointer;
+      &:disabled{
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+    }
+  }
+}
+

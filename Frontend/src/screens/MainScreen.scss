@@ -1,0 +1,41 @@
+@use "../styles/var.module.scss" as vars;
+
+
+.mainscreen-container {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.mainscreen-container.sans_serif {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+}
+
+.mainscreen-container.serif {
+  font-family: serif;
+}
+
+.mainscreen-container.light {
+  background-color: white;
+}
+
+.mainscreen-container.dark {
+  background-color: #0F1114;
+  color: white;
+}
+
+.mainscreen-container.small {
+  font-size: 0.8rem;
+}
+
+.mainscreen-container.medium {
+  font-size: 1rem;
+}
+
+.mainscreen-container.large {
+  font-size: 1.2rem;
+}

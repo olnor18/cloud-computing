@@ -1,0 +1,31 @@
+.survey-question-container {
+  width: 100%;
+  padding: 15px;
+  .survey-question-label {
+    font-weight: 700;
+    margin: 10px 0px;
+    font-size: 22px;
+  }
+  .survey-options-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    .survey-option-container {
+      width: 100%;
+      height: auto;
+      margin: 15px;
+      display: flex;
+      align-items: center;
+      .survey-question-radio-button {
+        width: 28px;
+        height: 28px;
+      }
+      .survey-answer-label {
+        font-size: 24px;
+        margin-left: 15px;
+      }
+    }
+  }
+}

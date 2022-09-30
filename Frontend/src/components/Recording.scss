@@ -1,0 +1,90 @@
+@use "../styles/var.module.scss" as vars;
+
+.recording-container {
+  width: 100vw;
+  margin: 0;
+  position: fixed;
+  bottom: 0; left: 0; top: 65vh;
+  height: 0px;
+  &.dark {
+    .timer {
+      background-color: #0F1114;
+      color: white;
+    }
+    background-color: #0F1114;
+    color: white;
+  }
+  &.light {
+    .timer {
+      background-color: white;
+      color: black;
+    }
+    background-color: white;
+    color: black;
+  }
+  & > span {
+    display: block;
+    width: 100%;
+    margin-bottom: 34px;
+    padding: 10px;
+  }
+  button {
+    width: 100%;
+    font-weight: 600;
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    padding: 16.5px;
+    color: vars.$white;
+    border: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 54px;
+    cursor: pointer;
+    opacity: 1;
+    &.inactive {
+      background-color: vars.$green;
+    }
+    &.active {
+      display: none;
+    }
+    &[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+  .timer {
+    position: fixed;
+    bottom: 0; left: 0;
+    width: 100%;
+    height: 54px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    &.medium {
+      font-size: 1.4rem;
+    }
+    &.large {
+      font-size: 2rem;
+    }
+  }
+  .videoUploadedMessage {
+    display: flex;
+    height: 54px;
+    width: 100%;
+    background-color: #ccc;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    p {
+      font-size: medium;
+    }
+  }
+}
+
+.recording-button.medium {
+  font-size: 1.08rem;
+}

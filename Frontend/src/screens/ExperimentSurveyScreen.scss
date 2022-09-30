@@ -1,0 +1,31 @@
+@use "../styles/var.module.scss" as vars;
+
+.survey-title {
+  text-align: center;
+  font-size: 28px;
+}
+
+.survey-form {
+  position: relative;
+  padding: 15px;
+  button {
+    width: 100%;
+    font-size: large;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    padding: 15px 25px;
+    color: vars.$white;
+    background-color: vars.$blue;
+    border: none;
+    border-radius: 35px;
+    margin: 30px 0 0;
+    opacity: 1;
+    margin: 15px auto;
+    cursor: pointer;
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }   
+}

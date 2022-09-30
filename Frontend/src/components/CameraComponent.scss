@@ -1,0 +1,12 @@
+.camera-container {
+  position: fixed;
+  top: 65vh;
+  right: 0;
+  display: block;
+  width: 100px;
+  height: 100px;
+  video {
+    width: 0;
+    height: 0;
+  }
+}

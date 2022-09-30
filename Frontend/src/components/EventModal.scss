@@ -1,0 +1,46 @@
+@use "../styles/var.module.scss" as vars;
+
+.modal-background {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  position: fixed;
+  top: 0; left: 0;
+  background: #000;
+  z-index: 100;
+  opacity: 0.5;
+}
+
+.modal-container {
+  background: #fff;
+  opacity: 1;
+  z-index: 101;
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 20px;
+  border-radius: 4px;
+  width: 90%;
+  color: black;
+    font-size: 1rem;
+  h2 {
+    text-align: center;
+  }
+  p {
+    font-weight: 400;
+  }
+  button {
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    border: none;
+    background-color: vars.$blue;
+    color: vars.$white;
+    font-weight: 400;
+    font-size: medium;
+    border-radius: 3px;
+  }
+}
