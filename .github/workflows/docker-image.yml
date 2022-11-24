@@ -1,0 +1,58 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build-frontend:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Log in to the Container registry
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v3
+      with:
+        context: Frontend        
+        platforms: linux/amd64      
+        push: true
+        tags: ghcr.io/${{ github.repository_owner }}/cloud-computing-frontend
+        labels: latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        
+  build-backend:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Log in to the Container registry
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v3
+      with:
+        context: Backend        
+        platforms: linux/amd64      
+        push: true
+        tags: ghcr.io/${{ github.repository_owner }}/cloud-computing-backend
+        labels: latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
