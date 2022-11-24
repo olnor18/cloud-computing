@@ -5,7 +5,7 @@ on:
     paths:
       - "Frontend/**"
       - "Backend/**"
-      - ".github/workflows/docker-image-gcr.yaml"
+      - ".github/workflows/docker-image-gcr.yml"
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
