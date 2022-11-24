@@ -33,16 +33,10 @@ jobs:
 
     - name: Configure Docker
       run: gcloud auth configure-docker eu.gcr.io --quiet
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v3
-      with:
-        context: Frontend        
-        platforms: linux/amd64      
-        push: true
-        labels: eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/cloud-computing-frontend
-        tags: latest
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
+    - name: Build Docker image
+      run: docker build Frontend -t eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/cloud-computing-frontend
+    - name: Push Docker image
+      run: docker push eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/cloud-computing-frontend
         
   build-backend:
     runs-on: ubuntu-latest
@@ -70,13 +64,3 @@ jobs:
       run: docker build Backend -t eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/cloud-computing-backend
     - name: Push Docker image
       run: docker push eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/cloud-computing-backend
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v3
-      with:
-        context: Backend        
-        platforms: linux/amd64      
-        push: true
-        labels: eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/cloud-computing-backend
-        tags: latest
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
