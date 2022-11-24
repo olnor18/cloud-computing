@@ -21,6 +21,10 @@ RUN npm run build
 
 FROM nginx:alpine as production-stage
 
+LABEL org.opencontainers.image.source=https://github.com/olnor18/cloud-computing
+LABEL org.opencontainers.image.description="Image for the Frontend component of the SEM9 Cloud project"
+
+
 COPY --from=build-stage /app/build /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
