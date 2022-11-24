@@ -34,8 +34,8 @@ jobs:
         context: Frontend        
         platforms: linux/amd64      
         push: true
-        tags: gcr.io/${{ secrets.GCP_PROJECT_ID }}/cloud-computing-frontend
-        labels: latest
+        labels: gcr.io/${{ secrets.GCP_PROJECT_ID }}/cloud-computing-frontend
+        tags: latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
         
@@ -63,7 +63,7 @@ jobs:
         context: Backend        
         platforms: linux/amd64      
         push: true
-        tags: gcr.io/${{ secrets.GCP_PROJECT_ID }}/cloud-computing-backend
-        labels: latest
+        labels: gcr.io/${{ secrets.GCP_PROJECT_ID }}/cloud-computing-backend
+        tags: latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
