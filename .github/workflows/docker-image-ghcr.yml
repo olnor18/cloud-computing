@@ -2,6 +2,10 @@ name: Docker Image CI Github
 
 on:
   push:
+    paths:
+    - "Frontend/**"
+    - "Backend/**"
+    - ".github/workflows/docker-image-ghcr.yaml"
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
