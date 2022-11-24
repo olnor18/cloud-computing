@@ -66,6 +66,10 @@ jobs:
 
     - name: Configure Docker
       run: gcloud auth configure-docker eu.gcr.io --quiet
+    - name: Build Docker image
+      run: docker build Backend -t eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/cloud-computing-backend
+    - name: Push Docker image
+      run: docker push eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/cloud-computing-backend
     - name: Build and push Docker image
       uses: docker/build-push-action@v3
       with:
