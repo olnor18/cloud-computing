@@ -34,7 +34,7 @@ MongoClient.connect(getDbConnectionString(), async (err, client) => {
     } else {
         try {
             const server = http.createServer(app);
-            const port = process.env.PORT;
+            const port = process.env.PORT || 3000;
             
             server.listen(port, async () => {
                 const db = client.db(process.env.DB_NAME);

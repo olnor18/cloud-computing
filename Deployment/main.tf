@@ -2,38 +2,25 @@ terraform {
   required_version = ">= 0.14"
 
   required_providers {
-    google = ">= 3.3"
+    google = ">= 4.44.1"
+    google-beta = ">= 4.44.1"
   }
 }
 
 provider "google" {
-  project = "cloudcoursesdu"
-  region  = "eu-west1"
+  project = var.project
+  region  = var.region
 }
 
-# Enables the Cloud Run API
-resource "google_project_service" "run_api" {
-  service = "run.googleapis.com"
-  disable_on_destroy = true
+provider "google-beta" {
+  project = var.project
+  region  = var.region
 }
 
-# Create the Cloud Run backend service
-resource "google_cloud_run_service" "run_service" {
-  name = "backend"
 
-  template {
-    spec {
-      containers {
-        image = "gcr.io/google-samples/hello-app:1.0"
-      }
-    }
-  }
-
-  traffic {
-    percent         = 100
-    latest_revision = true
-  }
-
-  # Waits for the Cloud Run API to be enabled
-  depends_on = [google_project_service.run_api]
+resource "google_project_service" "enabled_services" {
+  project            = var.project
+  service            = each.key
+  for_each           = toset(["run.googleapis.com", "vpcaccess.googleapis.com", "compute.googleapis.com", "storage.googleapis.com", "dns.googleapis.com", "redis.googleapis.com"])
+  disable_on_destroy = false
 }
