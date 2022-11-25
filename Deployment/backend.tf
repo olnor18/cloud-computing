@@ -41,22 +41,22 @@ resource "google_cloud_run_service" "run_service" {
             value = var.mongoconnectionstr
         }
         env {
-            name = "REDIS_URL"
+            name = "REDIS_URI"
             value = "redis://${google_redis_instance.cache.host}:6379"
         }
         env {
             name = "NODE_ENV"
             value = "production"
         }
-        startup_probe {
-          initial_delay_seconds = 0
-          timeout_seconds = 1
-          period_seconds = 3
-          failure_threshold = 1
-          tcp_socket {
-            port = 3000
-          }
-        }
+        # startup_probe {
+        #   initial_delay_seconds = 30
+        #   timeout_seconds = 1
+        #   period_seconds = 3
+        #   failure_threshold = 1
+        #   tcp_socket {
+        #     port = 3000
+        #   }
+        # }
         liveness_probe {
           http_get {
             path = "/health"
