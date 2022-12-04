@@ -26,10 +26,11 @@ jobs:
       run: npm i
     - name: Build website
       working-directory: ./Frontend
-      run: npm run build
+      # CI= to disable warnings-are-errors from Netlify
+      run: CI= npm run build
     - name: Push website
       uses: 'google-github-actions/upload-cloud-storage@v1'
       with:
-        path: './Frontend'
+        path: './Frontend/dist'
         destination: '${{ secrets.GCP_BUCKETNAME }}'
       
