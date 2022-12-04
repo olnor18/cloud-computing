@@ -33,4 +33,4 @@ jobs:
       with:
         path: './Frontend/build'
         destination: '${{ secrets.GCP_BUCKETNAME }}'
-      
+        parent: false
