@@ -1,0 +1,35 @@
+name: Static frontend CI Google
+
+on:
+  push:
+    paths:
+      - "Frontend/**"
+      - ".github/workflows/gcp-static-frontend.yml"
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+    
+jobs:
+  build-frontend:
+    runs-on: ubuntu-latest
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Login to GCR
+      uses: 'google-github-actions/auth@v1'
+      with:
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v1'
+    - name: Install packages
+      working-directory: ./Frontend
+      run: npm i
+    - name: Build website
+      working-directory: ./Frontend
+      run: npm run build
+    - name: Push website
+      uses: 'google-github-actions/upload-cloud-storage@v1'
+      with:
+        path: './Frontend'
+        destination: '${{ secrets.GCP_BUCKETNAME }}'
+      
