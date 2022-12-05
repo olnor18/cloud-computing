@@ -7,10 +7,21 @@ resource "google_storage_bucket" "website" {
   provider = google
   location = var.region
   name     = var.webbucketname
+
+  website {
+    main_page_suffix = "index.html"
+    not_found_page   = "index.html"
+  }
+
 }
 
-# Make new objects public
-resource "google_storage_default_object_access_control" "website_read" {
+resource "google_storage_bucket_access_control" "public_bucket_rule" {
+  bucket = google_storage_bucket.website.name
+  role   = "READER"
+  entity = "allUsers"
+}
+
+resource "google_storage_default_object_access_control" "public_bucket_rule" {
   bucket = google_storage_bucket.website.name
   role   = "READER"
   entity = "allUsers"
@@ -52,7 +63,7 @@ resource "google_compute_managed_ssl_certificate" "website" {
   provider = google-beta
   name     = "website-cert"
   managed {
-    domains = [google_dns_record_set.website.name]
+    domains = [google_dns_record_set.website.name, google_dns_record_set.backend.name]
   }
 }
 
@@ -72,7 +83,7 @@ resource "google_compute_target_https_proxy" "website" {
 }
 
 # GCP forwarding rule
-resource "google_compute_global_forwarding_rule" "default" {
+resource "google_compute_global_forwarding_rule" "frontend" {
   provider              = google
   name                  = "website-forwarding-rule"
   load_balancing_scheme = "EXTERNAL"
@@ -80,4 +91,28 @@ resource "google_compute_global_forwarding_rule" "default" {
   ip_protocol           = "TCP"
   port_range            = "443"
   target                = google_compute_target_https_proxy.website.self_link
+}
+
+
+resource "google_compute_url_map" "https_redirect_website" {
+  name            = "frontend-https-redirect"
+
+  default_url_redirect {
+    https_redirect         = true
+    redirect_response_code = "MOVED_PERMANENTLY_DEFAULT"
+    strip_query            = false
+  }
+}
+
+resource "google_compute_target_http_proxy" "https_redirect_website" {
+  name   = "frontend-http-proxy"
+  url_map          = google_compute_url_map.https_redirect_website.id
+}
+
+resource "google_compute_global_forwarding_rule" "https_redirect_website" {
+  name   = "frontend-lb-http"
+
+  target = google_compute_target_http_proxy.https_redirect_website.id
+  port_range = "80"
+  ip_address = google_compute_global_address.website.address
 }

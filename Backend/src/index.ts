@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === 'development') {
   }
 } else {
   corsOptions = {
-    origin: "https://website.gcp.n12.dk/"
+    origin: "*"//"https://website.gcp.n12.dk"
   }
 } 
 

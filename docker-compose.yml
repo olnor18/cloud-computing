@@ -1,7 +1,8 @@
 version: "3.9"
 services:
   server:
-    build: Backend
+    #build: Backend
+    image: eu.gcr.io/cloudcoursesdu/cloud-computing-backend@sha256:3b2b83d6f4ef6921e7d77f76fa03641b1cb3f8ad16923cff1d4a742bad942c22
     ports:
       - "8000:3000"
     env_file:

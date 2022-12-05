@@ -28,15 +28,17 @@ const initializeControllers = () => {
     app.set('TelemetryController', new TelemetryController(databaseManager));
 }
 
+console.log("Does this work?")
+
 MongoClient.connect(getDbConnectionString(), async (err, client) => {
     if (err || !client) {
         console.log('Unable to connect to the mongoDB server. Error:', err);
     } else {
         try {
             const server = http.createServer(app);
-            const port = process.env.PORT || 3000;
+            const port = Number.parseInt(process.env.PORT || "3000");
             
-            server.listen(port, async () => {
+            server.listen(port, "0.0.0.0", 511, async () => {
                 const db = client.db(process.env.DB_NAME);
                 app.set('database', db);
     
