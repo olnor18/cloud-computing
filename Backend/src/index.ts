@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === 'development') {
   }
 } else {
   corsOptions = {
-    origin: "https://iob.news"
+    origin: "https://website.gcp.n12.dk/"
   }
 } 
 
