@@ -7,9 +7,11 @@ async function sleep(time: number) {
 }
 
 debugRoutes.get("/stress", async (req, res) => {
-    for (let i = 0; i < 1000; i++){
-        let a = 2^100*3
-        await sleep(10)
-    }
+    let i = req.query.i?.toString() || "8";
+    let baseNumber = parseInt(i);
+    let result = 0;	
+	for (let i = Math.pow(baseNumber, 7); i >= 0; i--) {		
+		result += Math.atan(i) * Math.tan(i);
+	};
     return res.send("Done")
 } )
