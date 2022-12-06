@@ -18,7 +18,7 @@ import ScaleSurveyController from './Controllers/ScaleSurveyController';
 import { adaptionRoutes } from './Routes/AdaptionRoutes';
 import TelemetryController from './Controllers/TelemetryController';
 import { generateFileRoutes } from './Routes/GenerateFileRoutes';
-
+import { debugRoutes } from './Routes/DebugRoutes';
 let databaseManager: DatabaseManager;
 
 const initializeControllers = () => {
@@ -60,3 +60,4 @@ app.use('/surveys', surveyRoutes);
 app.use('/adaptions', adaptionRoutes);
 app.use('/health', healthRouter)
 app.use('/files/',generateFileRoutes)
+app.use('/debug', debugRoutes);
